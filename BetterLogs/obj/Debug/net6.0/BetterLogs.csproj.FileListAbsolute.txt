@@ -1,0 +1,15 @@
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\bin\Debug\net6.0\Info.json
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\bin\Debug\net6.0\BetterLogs.deps.json
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\bin\Debug\net6.0\BetterLogs.dll
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\bin\Debug\net6.0\BetterLogs.pdb
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\BetterLogs.csproj.AssemblyReference.cache
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\BetterLogs.GeneratedMSBuildEditorConfig.editorconfig
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\BetterLogs.AssemblyInfoInputs.cache
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\BetterLogs.AssemblyInfo.cs
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\BetterLogs.csproj.CoreCompileInputs.cache
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\BetterLogs.dll
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\refint\BetterLogs.dll
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\BetterLogs.pdb
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\ref\BetterLogs.dll
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\BetterLogs.Properties.Resources.resources
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net6.0\BetterLogs.csproj.GenerateResource.cache

@@ -1,0 +1,16 @@
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net481\BetterLogs.csproj.AssemblyReference.cache
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net481\BetterLogs.Properties.Resources.resources
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net481\BetterLogs.csproj.GenerateResource.cache
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net481\BetterLogs.GeneratedMSBuildEditorConfig.editorconfig
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net481\BetterLogs.AssemblyInfoInputs.cache
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net481\BetterLogs.AssemblyInfo.cs
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net481\BetterLogs.csproj.CoreCompileInputs.cache
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\bin\Debug\net481\Info.json
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\bin\Debug\net481\BetterLogs.dll
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\bin\Debug\net481\BetterLogs.pdb
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net481\BetterLogs.dll
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net481\BetterLogs.pdb
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\bin\Debug\net481\UnityEngine.TextRenderingModule.dll
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\obj\Debug\net481\BetterLogs.csproj.CopyComplete
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\bin\Debug\net481\UnityEngine.dll
+G:\workspace\mods\wrath\BetterLogs\BetterLogs\bin\Debug\net481\Owlcat.Runtime.UI.dll

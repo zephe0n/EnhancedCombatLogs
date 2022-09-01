@@ -1,0 +1,11 @@
+﻿{
+    "Id": "BetterLogs",
+    "DisplayName": "Better Console Logs",
+    "Author": "zepheon",
+    "Version": "0.0.1",
+    "ManagerVersion": "0.23.0",
+    "GameVersion": "1.3.0",
+    "Requirements": [],
+    "AssemblyName": "BetterLogs.dll",
+    "EntryMethod": "BetterLogs.Main.Load"
+}
