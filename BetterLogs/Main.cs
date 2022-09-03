@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using UnityEngine;
 using UnityModManagerNet;
 using System.Reflection;
 
@@ -8,12 +7,12 @@ namespace BetterLogs
 #if DEBUG
     [EnableReloading]
 #endif
-    static class Main
+    public static class Main
     {
         public static Settings Settings;
         public static bool Enabled;
 
-        static bool Load(UnityModManager.ModEntry modEntry)
+        public static bool Load(UnityModManager.ModEntry modEntry)
         {
             Settings = Settings.Load<Settings>(modEntry);
             modEntry.OnToggle = OnToggle;

@@ -1,6 +1,9 @@
 ﻿using Kingmaker.Blueprints.Root;
+using System.Globalization;
 using UnityEngine;
 using UnityModManagerNet;
+using Color = UnityEngine.Color;
+using FontStyle = UnityEngine.FontStyle;
 
 namespace BetterLogs
 {
@@ -24,10 +27,10 @@ namespace BetterLogs
         public bool SkillCheck = true;
         public bool CombatManeuver = true;
 
-        public Color SuccessColor = RestColors.TextColorSuccess;
-        public Color FailureColor = RestColors.TextColorFail;
-        public Color CriticalHitColor = RestColors.TextColorSuccess;
-        public Color CriticalMissColor = RestColors.TextColorFail;
+        public Color32 SuccessColor = RestColors.TextColorSuccess;
+        public Color32 FailureColor = RestColors.TextColorFail;
+        public Color32 CriticalHitColor = RestColors.TextColorSuccess;
+        public Color32 CriticalMissColor = RestColors.TextColorFail;
 
         public override void Save(UnityModManager.ModEntry modEntry)
         {
@@ -110,9 +113,17 @@ namespace BetterLogs
 
             if (draw_colors)
             {
-                GUILayout.BeginHorizontal();
+                GUILayout.BeginHorizontal(GUILayout.MaxWidth(500));
+                GUILayout.BeginVertical();
                 GUILayout.Label("Success color");
-                UnityModManager.UI.DrawColor(ref Main.Settings.SuccessColor);
+                GUILayout.Label("Failure color");
+                GUILayout.Label("Critical hit color");
+                GUILayout.Label("Critical miss color");
+                GUILayout.EndVertical();
+
+                GUILayout.BeginVertical();
+                GUILayout.BeginHorizontal();
+                DrawColor32(ref Main.Settings.SuccessColor);
                 if (GUILayout.Button("Default"))
                 {
                     Main.Settings.SuccessColor = RestColors.TextColorSuccess;
@@ -120,8 +131,7 @@ namespace BetterLogs
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Failure color");
-                UnityModManager.UI.DrawColor(ref Main.Settings.FailureColor);
+                DrawColor32(ref Main.Settings.FailureColor);
                 if (GUILayout.Button("Default"))
                 {
                     Main.Settings.FailureColor = RestColors.TextColorFail;
@@ -129,8 +139,7 @@ namespace BetterLogs
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Critical hit color");
-                UnityModManager.UI.DrawColor(ref Main.Settings.CriticalHitColor);
+                DrawColor32(ref Main.Settings.CriticalHitColor);
                 if (GUILayout.Button("Default"))
                 {
                     Main.Settings.CriticalHitColor = RestColors.TextColorSuccess;
@@ -138,16 +147,98 @@ namespace BetterLogs
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Critical miss color");
-                UnityModManager.UI.DrawColor(ref Main.Settings.CriticalMissColor);
+                DrawColor32(ref Main.Settings.CriticalMissColor);
                 if (GUILayout.Button("Default"))
                 {
                     Main.Settings.CriticalMissColor = RestColors.TextColorFail;
                 }
                 GUILayout.EndHorizontal();
+                GUILayout.EndVertical();
+                GUILayout.EndHorizontal();
+
+
+
+
+                //GUILayout.BeginHorizontal(GUILayout.MaxWidth(500));
+                //GUILayout.Label("Success color");
+                //DrawColor32(ref Main.Settings.SuccessColor);
+                //if (GUILayout.Button("Default"))
+                //{
+                //    Main.Settings.SuccessColor = RestColors.TextColorSuccess;
+                //}
+                //GUILayout.EndHorizontal();
+
+                //GUILayout.BeginHorizontal(GUILayout.MaxWidth(500));
+                //GUILayout.Label("Failure color");
+                //DrawColor32(ref Main.Settings.FailureColor);
+                //if (GUILayout.Button("Default"))
+                //{
+                //    Main.Settings.FailureColor = RestColors.TextColorFail;
+                //}
+                //GUILayout.EndHorizontal();
+
+                //GUILayout.BeginHorizontal(GUILayout.MaxWidth(500));
+                //GUILayout.Label("Critical hit color");
+                //DrawColor32(ref Main.Settings.CriticalHitColor);
+                //if (GUILayout.Button("Default"))
+                //{
+                //    Main.Settings.CriticalHitColor = RestColors.TextColorSuccess;
+                //}
+                //GUILayout.EndHorizontal();
+
+                //GUILayout.BeginHorizontal(GUILayout.MaxWidth(500));
+                //GUILayout.Label("Critical miss color");
+                //DrawColor32(ref Main.Settings.CriticalMissColor);
+                //if (GUILayout.Button("Default"))
+                //{
+                //    Main.Settings.CriticalMissColor = RestColors.TextColorFail;
+                //}
+                //GUILayout.EndHorizontal();
             }
 
             GUILayout.Space(10);
+        }
+
+        private static bool DrawColor32(ref Color32 color)
+        {
+            bool changed = false;
+
+            GUILayout.BeginHorizontal();
+            changed |= DrawByteField(ref color.r, " R", GUILayout.Width(50));
+            changed |= DrawByteField(ref color.g, " G", GUILayout.Width(50));
+            changed |= DrawByteField(ref color.b, " B", GUILayout.Width(50));
+            changed |= DrawByteField(ref color.a, " A", GUILayout.Width(50));
+            GUILayout.EndHorizontal();
+
+            return changed;
+        }
+
+        private static bool DrawByteField(ref byte b, string label, params GUILayoutOption[] options)
+        {
+            byte num = b;
+
+            GUILayout.BeginHorizontal(options);
+            GUILayout.Label(label);
+            string text = GUILayout.TextField(b.ToString(), GUILayout.Width(30));
+            GUILayout.EndHorizontal();
+
+            if (string.IsNullOrEmpty(text))
+            {
+                b = 0;
+            }
+            else if (int.TryParse(text, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out int result))
+            {
+                if (result > 0 && result <= 255)
+                {
+                    b = (byte)result;
+                }
+            }
+            else
+            {
+                b = 0;
+            }
+
+            return num != b;
         }
 
         private static bool CollapsibleButton(string text, bool initial_state = true)
