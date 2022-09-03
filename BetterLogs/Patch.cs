@@ -4,7 +4,6 @@ using Kingmaker.RuleSystem.Rules;
 using Kingmaker.UI.Models.Log;
 using Kingmaker.UI.Models.Log.CombatLog_ThreadSystem.LogThreads.Combat;
 using Kingmaker.UI.Models.Log.CombatLog_ThreadSystem;
-using Kingmaker.UI.Models.Log.CombatLog_ThreadSystem.LogThreads.Base;
 
 namespace BetterLogs
 {
@@ -62,9 +61,10 @@ namespace BetterLogs
         }
     }
 
-    [HarmonyPatch(typeof(RulebookSpellResistanceCheckLogThread), nameof(RulebookSpellResistanceCheckLogThread.HandleEvent))]
+    [HarmonyPatch(typeof(RulebookSpellResistanceCheckLogThread), nameof(RulebookSpellResistanceCheckLogThread.HandleEvent), new Type[] { typeof(RuleSpellResistanceCheck) })]
     public class SpellResistancePatch : LogThreadBase
     {
+        [HarmonyPrefix]
         static bool Prefix(RuleSpellResistanceCheck rule)
         {
             using (GameLogContext.Scope)
@@ -91,59 +91,61 @@ namespace BetterLogs
         }
     }
 
-    //[HarmonyPatch(typeof(RollSkillCheckLogThread), nameof(RollSkillCheckLogThread.HandlePartyStatCheckRolled))]
-    //public class PartySkillCheckPatch : LogThreadBase
-    //{
-    //    static bool Prefix(RulePartyStatCheck rule)
-    //    {
-    //        using (GameLogContext.Scope)
-    //        {
-    //            LogThreadBase.Strings.PartySkillCheckSuccess.Color = GameLogStrings.Instance.DefaultColor;
-    //            LogThreadBase.Strings.PartySkillCheckFail.Color = GameLogStrings.Instance.DefaultColor;
+    [HarmonyPatch(typeof(RollSkillCheckLogThread), nameof(RollSkillCheckLogThread.HandleEvent), new Type[] { typeof(RuleSkillCheck) })]
+    public class SkillCheckPatch : LogThreadBase
+    {
+        [HarmonyPrefix]
+        static bool Prefix(RuleSkillCheck check)
+        {
+            using (GameLogContext.Scope)
+            {
+                LogThreadBase.Strings.SkillCheckSuccess.Color = GameLogStrings.Instance.DefaultColor;
+                LogThreadBase.Strings.SkillCheckFail.Color = GameLogStrings.Instance.DefaultColor;
 
-    //            if (Main.Settings.SkillCheck && (Main.Settings.EnemyEnable || !rule.Initiator.IsPlayersEnemy))
-    //            {
-    //                if (!rule.Success && Main.Settings.FailEnable)
-    //                {
-    //                    LogThreadBase.Strings.PartySkillCheckFail.Color = Main.Settings.FailureColor;
-    //                }
-    //                else if (rule.Success && Main.Settings.SuccessEnable)
-    //                {
-    //                    LogThreadBase.Strings.PartySkillCheckSuccess.Color = Main.Settings.SuccessColor;
-    //                }
-    //            }
-    //        }
+                if (Main.Settings.SkillCheck)
+                {
+                    if (!check.Success && Main.Settings.FailEnable)
+                    {
+                        LogThreadBase.Strings.SkillCheckFail.Color = Main.Settings.FailureColor;
+                    }
+                    else if (check.Success && Main.Settings.SuccessEnable)
+                    {
+                        LogThreadBase.Strings.SkillCheckSuccess.Color = Main.Settings.SuccessColor;
+                    }
+                }
+            }
 
-    //        return true;
-    //    }
-    //}
+            return true;
+        }
+    }
 
-    //[HarmonyPatch(typeof(RollSkillCheckLogThread), nameof(RollSkillCheckLogThread.OnEventDidTrigger))]
-    //public class SkillCheckPatch : LogThreadBase
-    //{
-    //    static bool Prefix(RuleSkillCheck rule)
-    //    {
-    //        using (GameLogContext.Scope)
-    //        {
-    //            LogThreadBase.Strings.SkillCheckSuccess.Color = GameLogStrings.Instance.DefaultColor;
-    //            LogThreadBase.Strings.SkillCheckFail.Color = GameLogStrings.Instance.DefaultColor;
+    [HarmonyPatch(typeof(RollSkillCheckLogThread), nameof(RollSkillCheckLogThread.HandleEvent), new Type[] { typeof(RulePartyStatCheck) })]
+    public class PartySkillCheckPatch : LogThreadBase
+    {
+        [HarmonyPrefix]
+        static bool Prefix(RulePartyStatCheck check)
+        {
+            using (GameLogContext.Scope)
+            {
+                LogThreadBase.Strings.PartySkillCheckSuccess.Color = GameLogStrings.Instance.DefaultColor;
+                LogThreadBase.Strings.PartySkillCheckFail.Color = GameLogStrings.Instance.DefaultColor;
 
-    //            if (Main.Settings.SkillCheck && (Main.Settings.EnemyEnable || !rule.Initiator.IsPlayersEnemy))
-    //            {
-    //                if (!rule.Success && Main.Settings.FailEnable)
-    //                {
-    //                    LogThreadBase.Strings.SkillCheckFail.Color = Main.Settings.FailureColor;
-    //                }
-    //                else if (rule.Success && Main.Settings.SuccessEnable)
-    //                {
-    //                    LogThreadBase.Strings.SkillCheckSuccess.Color = Main.Settings.SuccessColor;
-    //                }
-    //            }
-    //        }
+                if (Main.Settings.SkillCheck)
+                {
+                    if (!check.Success && Main.Settings.FailEnable)
+                    {
+                        LogThreadBase.Strings.PartySkillCheckFail.Color = Main.Settings.FailureColor;
+                    }
+                    else if (check.Success && Main.Settings.SuccessEnable)
+                    {
+                        LogThreadBase.Strings.PartySkillCheckSuccess.Color = Main.Settings.SuccessColor;
+                    }
+                }
+            }
 
-    //        return true;
-    //    }
-    //}
+            return true;
+        }
+    }
 
     [HarmonyPatch(typeof(CombatManeuverLogMessage), nameof(CombatManeuverLogMessage.GetData))]
     public class CombatManeuverPatch
