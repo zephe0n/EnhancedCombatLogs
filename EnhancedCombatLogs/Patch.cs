@@ -16,18 +16,18 @@ namespace EnhancedCombatLogs
 
             if (Settings.IsEnabled(Settings.AttackRoll) && (Settings.IsEnabled(Settings.EnableEnemy) || !rule.Initiator.IsPlayersEnemy))
             {
-                //if (rule.IsCriticalRoll && rule.IsCriticalConfirmed && Main.Settings.CriticalSuccessEnable)
-                //{
-                //    __instance.Color = Main.Settings.CriticalHitColor;
-                //}
-                if (rule.IsHit && Settings.IsEnabled(Settings.EnableSuccess))
+                if (rule.IsCriticalRoll && rule.IsCriticalConfirmed && Settings.IsEnabled(Settings.EnableCriticalSuccess))
+                {
+                    __instance.Color = Settings.CriticalHitColor;
+                }
+                else if (rule.IsHit && Settings.IsEnabled(Settings.EnableSuccess))
                 {
                     __instance.Color = Settings.SuccessColor;
                 }
-                //else if (rule.AutoMiss && Main.Settings.CriticalFailEnable)
-                //{
-                //    __instance.Color = Main.Settings.CriticalMissColor;
-                //}
+                else if (rule.AutoMiss && Settings.IsEnabled(Settings.EnableCriticalFailure))
+                {
+                    __instance.Color = Settings.CriticalMissColor;
+                }
                 else if (!rule.IsHit && Settings.IsEnabled(Settings.EnableFailure))
                 {
                     __instance.Color = Settings.FailureColor;

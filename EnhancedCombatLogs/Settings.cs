@@ -140,19 +140,19 @@ namespace EnhancedCombatLogs
                     GetString($"{EnableFailure}-desc", "Enable failure"))
                 .WithLongDescription(GetString($"{EnableFailure}-desc-long", "Enable custom color on roll failure.")));
 
-            //settings.AddToggle(
-            //    Toggle.New(
-            //        GetKey(EnableCriticalSuccess),
-            //        true,
-            //        GetString($"{EnableCriticalSuccess}-desc", "Enable critical success"))
-            //    .WithLongDescription(GetString($"{EnableCriticalSuccess}-desc-long", "Enable custom color on roll critical success. Otherwise it will be treated as a regular success.")));
+            settings.AddToggle(
+                Toggle.New(
+                    GetKey(EnableCriticalSuccess),
+                    true,
+                    GetString($"{EnableCriticalSuccess}-desc", "Enable critical success"))
+                .WithLongDescription(GetString($"{EnableCriticalSuccess}-desc-long", "Enable custom color on roll critical success. Otherwise it will be treated as a regular success.")));
 
-            //settings.AddToggle(
-            //    Toggle.New(
-            //        GetKey(EnableCriticalFailure),
-            //        true,
-            //        GetString($"{EnableCriticalFailure}-desc", "Enable critical failure"))
-            //    .WithLongDescription(GetString($"{EnableCriticalFailure}-desc-long", "Enable custom color on roll critical failure. Otherwise it will be treated as a regular failure.")));
+            settings.AddToggle(
+                Toggle.New(
+                    GetKey(EnableCriticalFailure),
+                    true,
+                    GetString($"{EnableCriticalFailure}-desc", "Enable critical failure"))
+                .WithLongDescription(GetString($"{EnableCriticalFailure}-desc-long", "Enable custom color on roll critical failure. Otherwise it will be treated as a regular failure.")));
 
             //settings.AddToggle(
             //    Toggle.New(
