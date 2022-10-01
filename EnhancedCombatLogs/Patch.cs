@@ -5,7 +5,7 @@ using Kingmaker.UI.Models.Log;
 using Kingmaker.UI.Models.Log.CombatLog_ThreadSystem.LogThreads.Combat;
 using Kingmaker.UI.Models.Log.CombatLog_ThreadSystem;
 
-namespace BetterLogs
+namespace EnhancedCombatLogs
 {
     [HarmonyPatch(typeof(AttackLogMessage), nameof(AttackLogMessage.GetData))]
     public class AttackLogPatch
@@ -14,23 +14,23 @@ namespace BetterLogs
         {
             __instance.Color = GameLogStrings.Instance.DefaultColor;
 
-            if (Main.Settings.AttackRolls && (Main.Settings.EnemyEnable || !rule.Initiator.IsPlayersEnemy))
+            if (Settings.IsEnabled(Settings.AttackRoll) && (Settings.IsEnabled(Settings.EnableEnemy) || !rule.Initiator.IsPlayersEnemy))
             {
-                if (rule.IsCriticalRoll && rule.IsCriticalConfirmed && Main.Settings.CriticalSuccessEnable)
+                //if (rule.IsCriticalRoll && rule.IsCriticalConfirmed && Main.Settings.CriticalSuccessEnable)
+                //{
+                //    __instance.Color = Main.Settings.CriticalHitColor;
+                //}
+                if (rule.IsHit && Settings.IsEnabled(Settings.EnableSuccess))
                 {
-                    __instance.Color = Main.Settings.CriticalHitColor;
+                    __instance.Color = Settings.SuccessColor;
                 }
-                else if (rule.IsHit && Main.Settings.SuccessEnable)
+                //else if (rule.AutoMiss && Main.Settings.CriticalFailEnable)
+                //{
+                //    __instance.Color = Main.Settings.CriticalMissColor;
+                //}
+                else if (!rule.IsHit && Settings.IsEnabled(Settings.EnableFailure))
                 {
-                    __instance.Color = Main.Settings.SuccessColor;
-                }
-                else if (rule.AutoMiss && Main.Settings.CriticalFailEnable)
-                {
-                    __instance.Color = Main.Settings.CriticalMissColor;
-                }
-                else if (!rule.IsHit && Main.Settings.FailEnable)
-                {
-                    __instance.Color = Main.Settings.FailureColor;
+                    __instance.Color = Settings.FailureColor;
                 }
             }
 
@@ -45,15 +45,15 @@ namespace BetterLogs
         {
             __instance.Color = GameLogStrings.Instance.DefaultColor;
 
-            if (Main.Settings.SavingThrows && (Main.Settings.EnemyEnable || !rule.Initiator.IsPlayersEnemy))
+            if (Settings.IsEnabled(Settings.SavingThrow) && (Settings.IsEnabled(Settings.EnableEnemy) || !rule.Initiator.IsPlayersEnemy))
             {
-                if (Main.Settings.SuccessEnable && rule.IsPassed)
+                if (rule.IsPassed && Settings.IsEnabled(Settings.EnableSuccess))
                 {
-                    __instance.Color = Main.Settings.SuccessColor;
+                    __instance.Color = Settings.SuccessColor;
                 }
-                else if (Main.Settings.FailEnable && !rule.IsPassed)
+                else if (!rule.IsPassed && Settings.IsEnabled(Settings.EnableFailure))
                 {
-                    __instance.Color = Main.Settings.FailureColor;
+                    __instance.Color = Settings.FailureColor;
                 }
             }
 
@@ -73,16 +73,16 @@ namespace BetterLogs
                 LogThreadBase.Strings.SpellResistanceNotPassed.Color = GameLogStrings.Instance.DefaultColor;
                 LogThreadBase.Strings.SpellResistancePassed.Color = GameLogStrings.Instance.DefaultColor;
 
-                if (Main.Settings.SpellResistance && (Main.Settings.EnemyEnable || !rule.Initiator.IsPlayersEnemy))
+                if (Settings.IsEnabled(Settings.SpellResistance) && (Settings.IsEnabled(Settings.EnableEnemy) || !rule.Initiator.IsPlayersEnemy))
                 {
-                    if (rule.IsSpellResisted && Main.Settings.FailEnable)
+                    if (rule.IsSpellResisted && Settings.IsEnabled(Settings.EnableFailure))
                     {
-                        LogThreadBase.Strings.SpellImmunity.Color = Main.Settings.FailureColor;
-                        LogThreadBase.Strings.SpellResistanceNotPassed.Color = Main.Settings.FailureColor;
+                        LogThreadBase.Strings.SpellImmunity.Color = Settings.FailureColor;
+                        LogThreadBase.Strings.SpellResistanceNotPassed.Color = Settings.FailureColor;
                     }
-                    else if (!rule.IsSpellResisted && Main.Settings.SuccessEnable)
+                    else if (!rule.IsSpellResisted && Settings.IsEnabled(Settings.EnableSuccess))
                     {
-                        LogThreadBase.Strings.SpellResistancePassed.Color = Main.Settings.SuccessColor;
+                        LogThreadBase.Strings.SpellResistancePassed.Color = Settings.SuccessColor;
                     }
                 }
             }
@@ -102,15 +102,15 @@ namespace BetterLogs
                 LogThreadBase.Strings.SkillCheckSuccess.Color = GameLogStrings.Instance.DefaultColor;
                 LogThreadBase.Strings.SkillCheckFail.Color = GameLogStrings.Instance.DefaultColor;
 
-                if (Main.Settings.SkillCheck)
+                if (Settings.IsEnabled(Settings.SkillCheck))
                 {
-                    if (!check.Success && Main.Settings.FailEnable)
+                    if (!check.Success && Settings.IsEnabled(Settings.EnableFailure))
                     {
-                        LogThreadBase.Strings.SkillCheckFail.Color = Main.Settings.FailureColor;
+                        LogThreadBase.Strings.SkillCheckFail.Color = Settings.FailureColor;
                     }
-                    else if (check.Success && Main.Settings.SuccessEnable)
+                    else if (check.Success && Settings.IsEnabled(Settings.EnableSuccess))
                     {
-                        LogThreadBase.Strings.SkillCheckSuccess.Color = Main.Settings.SuccessColor;
+                        LogThreadBase.Strings.SkillCheckSuccess.Color = Settings.SuccessColor;
                     }
                 }
             }
@@ -130,15 +130,15 @@ namespace BetterLogs
                 LogThreadBase.Strings.PartySkillCheckSuccess.Color = GameLogStrings.Instance.DefaultColor;
                 LogThreadBase.Strings.PartySkillCheckFail.Color = GameLogStrings.Instance.DefaultColor;
 
-                if (Main.Settings.SkillCheck)
+                if (Settings.IsEnabled(Settings.SkillCheck))
                 {
-                    if (!check.Success && Main.Settings.FailEnable)
+                    if (!check.Success && Settings.IsEnabled(Settings.EnableFailure))
                     {
-                        LogThreadBase.Strings.PartySkillCheckFail.Color = Main.Settings.FailureColor;
+                        LogThreadBase.Strings.PartySkillCheckFail.Color = Settings.FailureColor;
                     }
-                    else if (check.Success && Main.Settings.SuccessEnable)
+                    else if (check.Success && Settings.IsEnabled(Settings.EnableSuccess))
                     {
-                        LogThreadBase.Strings.PartySkillCheckSuccess.Color = Main.Settings.SuccessColor;
+                        LogThreadBase.Strings.PartySkillCheckSuccess.Color = Settings.SuccessColor;
                     }
                 }
             }
@@ -154,15 +154,15 @@ namespace BetterLogs
         {
             __instance.Color = GameLogStrings.Instance.DefaultColor;
 
-            if (Main.Settings.CombatManeuver && (Main.Settings.EnemyEnable || !rule.Initiator.IsPlayersEnemy))
+            if (Settings.IsEnabled(Settings.CombatManeuver) && (Settings.IsEnabled(Settings.EnableEnemy) || !rule.Initiator.IsPlayersEnemy))
             {
-                if (rule.Success && Main.Settings.SuccessEnable)
+                if (rule.Success && Settings.IsEnabled(Settings.EnableSuccess))
                 {
-                    __instance.Color = Main.Settings.SuccessColor;
+                    __instance.Color = Settings.SuccessColor;
                 }
-                else if (!rule.Success && Main.Settings.FailEnable)
+                else if (!rule.Success && Settings.IsEnabled(Settings.EnableFailure))
                 {
-                    __instance.Color = Main.Settings.FailureColor;
+                    __instance.Color = Settings.FailureColor;
                 }
             }
 

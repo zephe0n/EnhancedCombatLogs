@@ -1,0 +1,13 @@
+﻿{
+    "Id": "EnhancedCombatLogs",
+    "DisplayName": "Enhanced Combat Logs",
+    "Author": "Zepheon",
+    "Version": "1.0.0",
+    "ManagerVersion": "0.21.3",
+    "Requirements": [ "ModMenu-1.2.3" ],
+    "LoadAfter": [ "MewsiferConsole.Mod" ],
+    "AssemblyName": "EnhancedCombatLogs.dll",
+    "EntryMethod": "EnhancedCombatLogs.Main.Load",
+    "Repository": "https://raw.githubusercontent.com/zephe0n/EnhancedCombatLogs/main/EnhancedCombatLogs/Repository.json",
+    "HomePage": "https://github.com/zephe0n/EnhancedCombatLogs"
+}

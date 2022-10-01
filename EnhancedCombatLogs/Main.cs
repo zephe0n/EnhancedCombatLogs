@@ -1,20 +1,24 @@
 ﻿using HarmonyLib;
 using UnityModManagerNet;
 using System.Reflection;
+using static UnityModManagerNet.UnityModManager.ModEntry;
 
-namespace BetterLogs
+namespace EnhancedCombatLogs
 {
 #if DEBUG
     [EnableReloading]
 #endif
     public static class Main
     {
-        public static Settings Settings;
         public static bool Enabled;
+        public static ModLogger Logger;
 
         public static bool Load(UnityModManager.ModEntry modEntry)
         {
-            Settings = Settings.Load<Settings>(modEntry);
+            Logger = modEntry.Logger;
+
+            Logger.Log("Loading");
+
             modEntry.OnToggle = OnToggle;
             modEntry.OnGUI = OnGUI;
             modEntry.OnSaveGUI = OnSaveGUI;
@@ -43,12 +47,12 @@ namespace BetterLogs
 
         static void OnGUI(UnityModManager.ModEntry modEntry)
         {
-            Settings.Draw();
+            //Settings.Draw();
         }
 
         static void OnSaveGUI(UnityModManager.ModEntry modEntry)
         {
-            Settings.Save(modEntry);
+            //Settings.Save(modEntry);
         }
     }
 }

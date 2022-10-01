@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net472</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+		<Nullable>disable</Nullable>
 		<PackageOutputPath>$(OutputPath)</PackageOutputPath>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<LangVersion>preview</LangVersion>
@@ -49,6 +49,10 @@
 		</Reference>
 		<Reference Include="UnityModManager">
 			<HintPath>$(WrathPath)\Wrath_Data\Managed\UnityModManager\UnityModManager.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="ModMenu">
+			<HintPath>$(WrathPath)\Mods\ModMenu\ModMenu.dll</HintPath>
 			<Private>False</Private>
 		</Reference>
 	</ItemGroup>
